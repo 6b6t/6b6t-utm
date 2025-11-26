@@ -232,7 +232,7 @@ For future events, reuse the same `utm_content` but change `utm_campaign` to the
 Footer shop CTA:
 
 ```text
-https://6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_footer&lang=en
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_footer&lang=en
 ```
 
 ---
@@ -280,7 +280,7 @@ https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_camp
 **“Buy ranks” line in NEW FEATURE section:**
 
 ```text
-https://6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=discordinfo_newfeature&lang=en
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=discordinfo_newfeature&lang=en
 ```
 
 ---
@@ -290,7 +290,7 @@ https://6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign
 Bot message at the bottom:
 
 ```text
-https://6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=advertising_bot&lang=en
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=advertising_bot&lang=en
 ```
 
 ---
@@ -300,7 +300,7 @@ https://6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign
 Vote reminder (every 12h):
 
 ```text
-https://6b6t.org/vote?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_vote&utm_content=general_bot-vote-reminder&lang=en
+https://www.6b6t.org/vote?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_vote&utm_content=general_bot-vote-reminder&lang=en
 ```
 
 ---
