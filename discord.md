@@ -4,6 +4,9 @@ This document explains **how to build UTM links for anything on the 6b6t Discord
 
 Use this file whenever you add or edit a link on Discord.
 
+> ⚠️ IMPORTANT: Always use `https://www.6b6t.org` (with `www`) in all UTM links.  
+> Do **not** use `https://6b6t.org` without `www` for Discord tracking links.
+
 ---
 
 ## 1. UTM basics for Discord
