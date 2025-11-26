@@ -64,7 +64,7 @@ Long-term campaigns:
 * `evergreen_website` – links to the main site
 * `evergreen_shop` – links to the shop / ranks
 * `evergreen_vote` – links to the vote page
-* `evergreen_blog` – links to the blog
+* `evergreen_blog` – links to the blog (for now unused)
 
 Event / time-limited campaigns:
 
