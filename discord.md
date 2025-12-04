@@ -232,6 +232,12 @@ For future events, reuse the same `utm_content` but change `utm_campaign` to the
 
 ### 4.3 `#change-log`
 
+Link to shop inside the message:
+
+```text
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_main&lang=en
+```
+
 Footer shop CTA:
 
 ```text
