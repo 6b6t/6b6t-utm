@@ -4,8 +4,8 @@ This document explains **how to build UTM links for 6b6t social media accounts**
 
 Use this file whenever you add or edit a link on any 6b6t social profile.
 
-> ⚠️ Many platforms (YouTube, TikTok, Instagram) show the full URL in bios/descriptions, which looks ugly with UTMs.  
-> For now, we only use **full UTM links on Reddit**, because Reddit hides them.  
+> ⚠️ Many platforms (YouTube, TikTok, Instagram) show the full URL in bios/descriptions, which looks ugly with UTMs.
+> For now, we only use **full UTM links on Reddit**, because Reddit hides them.
 > Other platforms will use **pretty redirect URLs** once the dev adds them.
 
 ---
@@ -20,7 +20,7 @@ utm_medium   = <surface>
 utm_campaign = <what this link is for>
 utm_content  = <where exactly the link lives>
 lang         = <language code> (en, es, ru, …) – only if known
-````
+```
 
 We only add UTMs to links that go to our own domains:
 
@@ -50,20 +50,20 @@ reddit
 
 This describes **what type of surface** the link is on.
 
-Planned values:
+Allowed values:
 
-* `profile` – profile / bio / about / sidebar links (current focus)
-* `video` – YouTube video descriptions, pinned comments (future)
-* `post` – TikTok/Instagram/Reddit post bodies (future)
-* `comment` – comments with links (future)
+* `profile` – profile / bio / about / sidebar links
+* `post` – post bodies (Reddit posts; later also other platforms if we ever use full UTMs there)
+* `comment` – comments with links (e.g. pinned Reddit comment)
+* `video` – YouTube video descriptions / pinned comments (future)
 
-**Right now we only use**:
+**Right now we actively use:**
 
 ```text
 utm_medium=profile
 ```
 
-for profile/about/sidebar links.
+and on Reddit we also allow `utm_medium=post` and `utm_medium=comment` when we include links in posts/comments.
 
 ---
 
@@ -76,9 +76,14 @@ Long-term campaigns:
 * `evergreen_website` – links to the main site
 * `evergreen_shop` – links to the shop / ranks
 
-Later we can add event campaigns if we ever link directly to event landing pages from socials.
+Event / time-limited campaigns:
 
-**Rule:** don’t invent random names. Be specific and careful.
+* `event_<name>_<year>` (example: `event_newshop_ultrapricechanges_2026`)
+
+**Rules:**
+
+* don’t invent random names. Be specific and careful.
+* if you already used an event campaign name on Discord for the same announcement, reuse the same `utm_campaign` on Reddit/socials.
 
 ---
 
@@ -86,25 +91,37 @@ Later we can add event campaigns if we ever link directly to event landing pages
 
 This is **where exactly the link lives** on that platform.
 
-Pattern:
+#### Preferred pattern (NEW links)
+
+Use a short, Discord-like placement format:
 
 ```text
-utm_content=<platform>_<surface>[_extra]
+utm_content=<surface>_<slot>
 ```
 
 Where:
 
-* `<platform>` – `youtube`, `tiktok`, `instagram`, `reddit`, etc.
-* `<surface>` – `profile-main`, `subreddit-sidebar`, etc.
-* `[_extra]` – optional extra detail if needed.
+* `<surface>` – `profile`, `post`, `comment`, `video`
+* `<slot>` – short placement identifier, e.g. `main`, `footer`, `pinned`, `sidebar`
 
-Examples (general rules):
+Examples (recommended):
 
-* Main website link on YouTube channel → `youtube_profile-main`
-* Main website link on TikTok profile → `tiktok_profile-main`
-* Main website link on Instagram profile → `instagram_profile-main`
-* Main website link on subreddit sidebar → `reddit_subreddit-sidebar`
-* Shop link on subreddit sidebar → `reddit_subreddit-sidebar-shop`
+* Main shop link inside a Reddit post body → `utm_content=post_main`
+* Footer / secondary shop link in the same Reddit post → `utm_content=post_footer`
+* Link in a pinned Reddit comment → `utm_content=comment_pinned`
+* Link in a normal Reddit comment thread → `utm_content=comment_main`
+* Profile/sidebar main website link → `utm_content=profile_sidebar`
+* Profile/sidebar shop link → `utm_content=profile_sidebar-shop` (if you need this distinction)
+
+**Rule:** use underscores for new values (avoid `-`).
+
+#### Legacy pattern (already live, do not change)
+
+Some older links already use a different format (including platform prefixes and `-`).
+These must remain unchanged to preserve tracking continuity:
+
+* `utm_content=reddit_subreddit-sidebar`
+* `utm_content=reddit_subreddit-sidebar-shop`
 
 ---
 
@@ -135,7 +152,7 @@ https://www.6b6t.org/<path>
 ?utm_source=<platform>
 &utm_medium=profile
 &utm_campaign=<evergreen_website or evergreen_shop>
-&utm_content=<platform>_<surface>
+&utm_content=<utm_content value>
 &lang=<en|es|ru>
 ```
 
@@ -143,6 +160,32 @@ Examples of `<path>`:
 
 * main website: `""` (just `/`)
 * shop: `shop`
+
+---
+
+### 3.2 Posts – generic template (Reddit supported)
+
+```text
+https://www.6b6t.org/<path>
+?utm_source=<platform>
+&utm_medium=post
+&utm_campaign=<evergreen_* or event_*>
+&utm_content=<utm_content value>
+&lang=<en|es|ru>
+```
+
+---
+
+### 3.3 Comments – generic template (Reddit supported)
+
+```text
+https://www.6b6t.org/<path>
+?utm_source=<platform>
+&utm_medium=comment
+&utm_campaign=<evergreen_* or event_*>
+&utm_content=<utm_content value>
+&lang=<en|es|ru>
+```
 
 ---
 
@@ -154,7 +197,7 @@ When you change a link on Reddit, **do not change the UTM parameters** unless yo
 
 ---
 
-### 4.1 Subreddit – main website link
+### 4.1 Subreddit – main website link (EXISTING – do not change)
 
 ```text
 https://www.6b6t.org/?utm_source=reddit&utm_medium=profile&utm_campaign=evergreen_website&utm_content=reddit_subreddit-sidebar&lang=en
@@ -164,13 +207,43 @@ Use this as the **main website link** in the subreddit sidebar / community links
 
 ---
 
-### 4.2 Subreddit – shop link
+### 4.2 Subreddit – shop link (EXISTING – do not change)
 
 ```text
 https://www.6b6t.org/shop?utm_source=reddit&utm_medium=profile&utm_campaign=evergreen_shop&utm_content=reddit_subreddit-sidebar-shop&lang=en
 ```
 
 Use this as the **shop / ranks link** in the subreddit sidebar / community links.
+
+---
+
+### 4.3 Reddit posts (supported)
+
+Use these when you make a Reddit post announcing something and include a link in the post body.
+
+**Event announcement example (shop link in the main paragraph):**
+
+```text
+https://www.6b6t.org/shop?utm_source=reddit&utm_medium=post&utm_campaign=event_newshop_ultrapricechanges_2026&utm_content=post_main&lang=en
+```
+
+**Same post, footer CTA shop link:**
+
+```text
+https://www.6b6t.org/shop?utm_source=reddit&utm_medium=post&utm_campaign=event_newshop_ultrapricechanges_2026&utm_content=post_footer&lang=en
+```
+
+**Optional: pinned comment link (if you post the link as a pinned comment instead):**
+
+```text
+https://www.6b6t.org/shop?utm_source=reddit&utm_medium=comment&utm_campaign=event_newshop_ultrapricechanges_2026&utm_content=comment_pinned&lang=en
+```
+
+**Rules:**
+
+* Only add UTMs to `www.6b6t.org` links.
+* Do not add UTMs to external links (Stripe billing portal, YouTube, TikTok, etc.).
+* Reuse the same `utm_campaign` across all links within the same Reddit post.
 
 ---
 
@@ -192,18 +265,28 @@ Once redirects are ready, we can update this file with the final UTM targets and
 ## 6. How to add new social links later
 
 1. Decide the **platform** → `utm_source=<platform>`.
-2. Decide the **surface** → for profile/bio/sidebar use `utm_medium=profile`.
+2. Decide the **surface** → pick `utm_medium`:
+
+   * profile/bio/sidebar → `utm_medium=profile`
+   * post body → `utm_medium=post` (Reddit supported)
+   * comment → `utm_medium=comment` (Reddit supported)
 3. Decide the **goal** → pick `utm_campaign`:
 
    * website → `evergreen_website`
    * shop → `evergreen_shop`
-4. Define **where exactly** it lives → `utm_content=<platform>_<surface>`.
+   * event announcement → `event_<name>_<year>`
+4. Define **where exactly** it lives → set `utm_content`:
+
+   * Preferred new format: `<surface>_<slot>` (example: `post_main`)
+   * Keep legacy values unchanged if already live
 5. Add `lang=<code>` if you know the language.
 6. Keep the pattern consistent with this file.
 
-If in doubt, copy the Reddit examples and only change:
+If in doubt, copy an existing Reddit sidebar link (profile) or the Reddit post examples above (post/comment) and only change:
 
 * the **platform** in `utm_source`
-* the **surface** in `utm_content`
+* the **utm_medium** (`profile` vs `post` vs `comment`)
+* the **campaign** (if it’s a new event)
+* the **content** (if it’s a new placement)
 * the **path** (`/` or `/shop`)
-* the **lang`** (for non-English accounts)
+* the **lang** (for non-English accounts)
