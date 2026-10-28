@@ -18,6 +18,7 @@ utm_source   = discord
 utm_medium   = discord_channel | discord_command
 utm_campaign = <what this link is for>
 utm_content  = <where exactly the link lives>
+utm_term     = <post date YYYY-MM-DD> – #change-log posts only (see 2.6)
 lang         = <language code> (en, es, ru, …) – only if known
 ```
 
@@ -153,6 +154,19 @@ Language code of the content:
 
 ---
 
+### 2.6 `utm_term` (changelog posts)
+
+Every changelog uses the same `utm_content` values (`changelog_main`, `changelog_footer`), so on its own you can't tell which post a click came from. Add the date from the post title to **every** 6b6t link in a `#change-log` post:
+
+* `Changelog [2026/10/28] — …` → `utm_term=2026-10-28`
+* Use dashes, not slashes (no URL encoding, sorts by date).
+* A second changelog on the same day: `utm_term=2026-10-28-2`.
+* Body links and the footer CTA in one post share the same `utm_term`.
+
+This lets you compare posts and footer sales lines against each other.
+
+---
+
 ## 3. URL templates
 
 ### 3.1 Channels – generic template
@@ -232,17 +246,19 @@ For future events, reuse the same `utm_content` but change `utm_campaign` to the
 
 ### 4.3 `#change-log`
 
-Link to shop inside the message:
+Link to shop inside the message (`utm_term` = the date from the post title, see 2.6):
 
 ```text
-https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_main&lang=en
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_main&utm_term=2026-10-28&lang=en
 ```
 
 Footer shop CTA:
 
 ```text
-https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_footer&lang=en
+https://www.6b6t.org/shop?utm_source=discord&utm_medium=discord_channel&utm_campaign=evergreen_shop&utm_content=changelog_footer&utm_term=2026-10-28&lang=en
 ```
+
+Other 6b6t pages linked in the message body also use `changelog_main` and the same `utm_term`, with the campaign matching the page (`evergreen_vote` for /vote, `evergreen_website` for other pages).
 
 ---
 
